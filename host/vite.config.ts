@@ -18,6 +18,7 @@ export default defineConfig({
       filename: configuration.APP_FILE_NAME,
       remotes: {
         loginApp: configuration.LOGIN_REMOTE,
+        tasklistApp: configuration.TASKLIST_REMOTE,
       },
       shared: ["react", "react-dom"],
     }),
