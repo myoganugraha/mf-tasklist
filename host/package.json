@@ -11,6 +11,7 @@
     "start-mf": "npm run build && npm run preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.1",
     "antd": "^5.21.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

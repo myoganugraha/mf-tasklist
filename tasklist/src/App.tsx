@@ -1,13 +1,13 @@
 import { Col, Layout, Row } from "antd";
-import "./App.css";
 import TaskQueueComponent from "./components/task-queue/TaskQueue";
 import { TaskItem } from "./types/TaskItem";
 import { Content } from "antd/es/layout/layout";
 import TaskDetails from "./components/task-details/TaskDetails";
 import { useState } from "react";
 import TaskContext from "./components/task-context/TaskContext";
+import { mockTaskItemList } from "./types/__mocks__/taskItems.mock";
 
-const TaskList: React.FC<{ taskList: TaskItem[] }> = ({ taskList }) => {
+const TaskList: React.FC<{ taskList?: TaskItem[] }> = ({ taskList = mockTaskItemList }) => {
   const [selectedTaskList, setSelectedTaskList] = useState<
     TaskItem | undefined
   >(undefined);
@@ -46,8 +46,7 @@ const TaskList: React.FC<{ taskList: TaskItem[] }> = ({ taskList }) => {
             ) : (
               <div
                 style={{
-                  minWidth: 250,
-                  minHeight: "95vh",
+                  minWidth: 200,
                 }}
               ></div>
             )}
