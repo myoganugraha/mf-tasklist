@@ -14,9 +14,6 @@ export default defineConfig({
     federation({
       name: configuration.APP_FILE_NAME,
       filename: configuration.APP_FILE_NAME,
-      exposes: {
-        "./Tasklist": "./src/App.tsx",
-      },
       shared: ["react", "react-dom"],
     }),
   ],
