@@ -1,4 +1,4 @@
-export interface TaskItem {
+export interface ITaskItem {
     id: string
     name: string
     taskDefinitionId: string

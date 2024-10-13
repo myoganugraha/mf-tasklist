@@ -1,11 +1,11 @@
 import { Button, Col, Divider, Row, Typography } from "antd";
-import { TaskItem } from "../../types/TaskItem";
+import { ITaskItem } from "../../types/ITaskItem";
 import UnassignedInformationComponent from "../unassigned-information/UnassignedInformationComponent";
 import AssignedInformationComponent from "../assigned-information/AssignedInformationComponent";
 
 const { Text, Title } = Typography;
 
-const TaskDetails: React.FC<{ item: TaskItem | undefined }> = ({ item }) => {
+const TaskDetails: React.FC<{ item: ITaskItem | undefined }> = ({ item }) => {
   return (
     <div
       style={{

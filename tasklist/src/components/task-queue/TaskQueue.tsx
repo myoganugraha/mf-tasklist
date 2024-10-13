@@ -1,5 +1,5 @@
 import { Typography, List, Space } from "antd";
-import { TaskItem } from "../../types/TaskItem";
+import { ITaskItem } from "../../types/ITaskItem";
 import { CalendarOutlined } from "@ant-design/icons";
 import UnassignedInformationComponent from "../unassigned-information/UnassignedInformationComponent";
 import AssignedInformationComponent from "../assigned-information/AssignedInformationComponent";
@@ -8,8 +8,8 @@ import { dateFormatter } from "../../utils/DateFormatter";
 const { Text } = Typography;
 
 const TaskQueueComponent: React.FC<{
-  taskList: TaskItem[];
-  onClick: (taskItem: TaskItem) => void;
+  taskList: ITaskItem[];
+  onClick: (taskItem: ITaskItem) => void;
 }> = ({ taskList, onClick }) => {
   return (
     <List

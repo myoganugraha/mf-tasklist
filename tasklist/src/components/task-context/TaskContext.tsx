@@ -1,10 +1,10 @@
 import { Col, Divider, Typography } from "antd";
-import { TaskItem } from "../../types/TaskItem";
+import { ITaskItem } from "../../types/ITaskItem";
 import { dateFormatter } from "../../utils/DateFormatter";
 
 const { Text } = Typography;
 
-const TaskContext: React.FC<{ item: TaskItem | undefined }> = ({ item }) => {
+const TaskContext: React.FC<{ item: ITaskItem | undefined }> = ({ item }) => {
   return (
     <div
       style={{

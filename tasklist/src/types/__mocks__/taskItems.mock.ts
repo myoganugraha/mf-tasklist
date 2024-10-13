@@ -1,6 +1,6 @@
-import { TaskItem } from "../TaskItem";
+import { ITaskItem } from "../ITaskItem";
 
-const mockTaskItem1: TaskItem = {
+const mockTaskItem1: ITaskItem = {
   id: "2251799813724745",
   name: "Payment Creation",
   taskDefinitionId: "Activity_0i5lo66",
@@ -27,7 +27,7 @@ const mockTaskItem1: TaskItem = {
   implementation: "JOB_WORKER",
 };
 
-const mockTaskItem2: TaskItem = {
+const mockTaskItem2: ITaskItem = {
   id: "2251799813687904",
   name: "Payment Creation",
   taskDefinitionId: "Activity_0i5lo66",
@@ -54,6 +54,6 @@ const mockTaskItem2: TaskItem = {
   implementation: "JOB_WORKER",
 };
 
-const mockTaskItemList: TaskItem[] = [mockTaskItem1, mockTaskItem2];
+const mockTaskItemList: ITaskItem[] = [mockTaskItem1, mockTaskItem2];
 
 export { mockTaskItem1, mockTaskItem2, mockTaskItemList };

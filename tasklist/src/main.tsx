@@ -1,12 +1,15 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import TaskList from './App.tsx'
 import './index.css'
+import { Provider } from 'react-redux'
+import { store } from './redux/store.ts'
 
-import { mockTaskItemList } from './types/__mocks__/taskItems.mock.ts'
-
-createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <TaskList taskList={mockTaskItemList}/>
-  </StrictMode>,
+    <Provider store={store}>
+      <TaskList/>
+    </Provider>
+  </StrictMode>
 )
+

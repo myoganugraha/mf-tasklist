@@ -1,16 +1,33 @@
 import { Col, Layout, Row } from "antd";
 import TaskQueueComponent from "./components/task-queue/TaskQueue";
-import { TaskItem } from "./types/TaskItem";
+import { ITaskItem } from "./types/ITaskItem";
 import { Content } from "antd/es/layout/layout";
 import TaskDetails from "./components/task-details/TaskDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskContext from "./components/task-context/TaskContext";
-import { mockTaskItemList } from "./types/__mocks__/taskItems.mock";
+import { tasklistApi } from "./hooks/tasklistApi";
 
-const TaskList: React.FC<{ taskList?: TaskItem[] }> = ({ taskList = mockTaskItemList }) => {
-  const [selectedTaskList, setSelectedTaskList] = useState<
-    TaskItem | undefined
-  >(undefined);
+const TaskList = () => {
+  const [tasklist, setTasklist] = useState<ITaskItem[]>([]);
+  const [selectedTaskList, setSelectedTaskList] = useState<ITaskItem | null>(
+    null
+  );
+
+  const { getAllTaskList } = tasklistApi();
+
+  useEffect(() => {
+    fetchAllTaskList();
+  }, []);
+
+  const fetchAllTaskList = async () => {
+    try {
+      const tasklistData = await getAllTaskList();
+      setTasklist(tasklistData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Layout
       style={{
@@ -21,7 +38,7 @@ const TaskList: React.FC<{ taskList?: TaskItem[] }> = ({ taskList = mockTaskItem
         <Row>
           <Col>
             <TaskQueueComponent
-              taskList={taskList}
+              taskList={tasklist}
               onClick={(item) => {
                 console.log(item);
                 setSelectedTaskList(item);
