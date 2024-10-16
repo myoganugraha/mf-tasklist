@@ -1,9 +1,6 @@
-import {
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { IUserType } from "../../types/user.type";
-import { loginAction } from "../actions/auth.action";
+import { loginAction, userDetailsAction } from "../actions/auth.action";
 
 interface AuthState {
   loading: boolean;
@@ -24,14 +21,7 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
-    },
-    setUserDetails: (state, action: PayloadAction<IUserType>) => {
-      state.userDetails = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loginAction.pending, (state) => {
@@ -42,16 +32,25 @@ export const authSlice = createSlice({
       .addCase(loginAction.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.token = payload;
-        state.success = true
+        state.success = true;
       })
       .addCase(loginAction.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
         state.success = false;
+      })
+      .addCase(userDetailsAction.pending, (state) => {
+        state.userDetails = undefined;
+      })
+      .addCase(userDetailsAction.fulfilled, (state, { payload }) => {
+        state.userDetails = payload;
+      })
+      .addCase(userDetailsAction.rejected, (state) => {
+        state.userDetails = undefined;
       });
   },
 });
 
-export const { setToken, setUserDetails } = authSlice.actions;
+export const {} = authSlice.actions;
 
 export default authSlice.reducer;
