@@ -4,14 +4,14 @@ import viteLogo from "/vite.svg";
 import "./Login.css";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./redux/store";
-import { loginAction } from "./redux/actions/auth.action";
+import { loginAction, userDetailsAction } from "./redux/actions/auth.action";
 
 type NotificationType = "success" | "info" | "warning" | "error";
 
 const LoginPage = () => {
   const [api, contextHolder] = notification.useNotification();
 
-  const { loading, error, success, token } = useAppSelector(
+  const { loading, error, success, token, userDetails } = useAppSelector(
     (state) => state.auth
   );
   const dispatch = useAppDispatch();
@@ -24,6 +24,7 @@ const LoginPage = () => {
     if (success) {
       console.log({ token });
       openNotification("success", "Login Success", "");
+      dispatch(userDetailsAction(token!));
     }
   }, [success]);
 
@@ -32,6 +33,12 @@ const LoginPage = () => {
       openNotification("error", "Login Failed", "");
     }
   }, [error]);
+
+  useEffect(() => {
+    if (userDetails) {
+      console.log(userDetails );
+    }
+  }, [userDetails]);
 
   const openNotification = (
     type: NotificationType,
