@@ -2,26 +2,36 @@ import { Button, Form, notification, Input } from "antd";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./Login.css";
-import { loginApi } from "./service/login.service";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./redux/store";
+import { loginAction } from "./redux/actions/auth.action";
 
 type NotificationType = "success" | "info" | "warning" | "error";
 
 const LoginPage = () => {
-  const { postLogin } = loginApi();
   const [api, contextHolder] = notification.useNotification();
-  const [isLoading, setLoading] = useState<boolean>(false);
+
+  const { loading, error, success, token } = useAppSelector(
+    (state) => state.auth
+  );
+  const dispatch = useAppDispatch();
 
   const onFinish = async (values: any) => {
-    setLoading(true);
-    try {
-      await postLogin(values.username, values.password);
-    } catch (e: any) {
-      openNotification("error", "Login Failed", e.message);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(loginAction(values));
   };
+
+  useEffect(() => {
+    if (success) {
+      console.log({ token });
+      openNotification("success", "Login Success", "");
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error) {
+      openNotification("error", "Login Failed", "");
+    }
+  }, [error]);
 
   const openNotification = (
     type: NotificationType,
@@ -59,7 +69,7 @@ const LoginPage = () => {
           <Input.Password placeholder="Password" />
         </Form.Item>
         <Form.Item>
-          <Button block htmlType="submit" loading={isLoading}>
+          <Button block htmlType="submit" loading={loading}>
             Log In
           </Button>
         </Form.Item>
